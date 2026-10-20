@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#101614">
+<link rel="manifest" href="manifest.json">
+<title>Forge Fitness — My Journey</title>
+<style>
+:root{--bg:#101614;--panel:#19211e;--panel2:#202b26;--text:#f2f6f3;--muted:#aab8b0;--accent:#b7f36b;--accent2:#8dd83f;--line:#344139;--danger:#ff8b81}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:760px;margin:auto;padding:0 14px 100px}.top{padding:22px 4px 15px;display:flex;justify-content:space-between;align-items:center;gap:10px}.brand{font-weight:900;letter-spacing:.08em;font-size:13px;color:var(--accent)}h1{font-size:27px;line-height:1.1;margin:6px 0}h2{font-size:18px;margin:0 0 12px}h3{font-size:14px;margin:0 0 8px}.muted{color:var(--muted)}.small{font-size:12px}.pill{border:1px solid var(--line);border-radius:99px;padding:6px 10px;color:var(--muted);font-size:12px}.hero{background:linear-gradient(135deg,#273b2a,#19251f);border:1px solid #3b5438;border-radius:22px;padding:18px;margin:4px 0 16px}.hero p{margin:6px 0 0;color:#c5d5c8}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:14px;margin-bottom:11px;min-width:0}.metric{font-size:25px;font-weight:800;letter-spacing:-.03em}.metric span{font-size:12px;font-weight:500;color:var(--muted);letter-spacing:0}.label{font-size:12px;color:var(--muted);margin-bottom:4px}.progress{height:7px;background:#303b34;border-radius:10px;overflow:hidden;margin:9px 0 4px}.progress>div{height:100%;background:var(--accent);border-radius:10px;width:0}.tabs{position:fixed;bottom:0;left:0;right:0;background:#121a16f5;border-top:1px solid var(--line);display:flex;justify-content:center;padding:8px max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom));z-index:5;backdrop-filter:blur(12px)}.tabs-inner{display:flex;width:100%;max-width:760px;justify-content:space-around;gap:4px}.tab{border:0;background:transparent;color:var(--muted);padding:7px 5px;border-radius:12px;font-size:11px;min-width:0;flex:1}.tab .ico{display:block;font-size:19px;margin-bottom:2px}.tab.active{color:var(--accent);background:#263426}.page{display:none}.page.active{display:block}.btn{border:0;border-radius:12px;background:var(--accent);color:#14200e;font-weight:800;padding:11px 14px}.btn.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.btn.danger{background:#472b29;color:#ffd5d1}.btn.full{width:100%}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;min-width:0}.field label{font-size:12px;color:var(--muted)}input,select,textarea{width:100%;background:#111915;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:11px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--accent)}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.formgrid .wide{grid-column:1/-1}.listitem{display:flex;justify-content:space-between;gap:12px;align-items:center;border-top:1px solid var(--line);padding:10px 0}.listitem:first-child{border-top:0}.badge{font-size:11px;border-radius:7px;background:#2c3b2d;color:var(--accent);padding:4px 7px;white-space:nowrap}.notice{border-left:3px solid var(--accent);padding:9px 11px;background:#202c23;border-radius:0 10px 10px 0;color:#d9e7dc;font-size:13px}.empty{color:var(--muted);font-size:13px;padding:10px 0}.barrow{display:grid;grid-template-columns:70px 1fr 42px;gap:8px;align-items:center;font-size:12px;margin:8px 0}.bar{height:7px;background:#303b34;border-radius:8px;overflow:hidden}.bar div{height:100%;background:var(--accent)}.photo-preview{max-width:100%;max-height:160px;border-radius:10px;margin-top:8px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 10px}.link{color:var(--accent);text-decoration:none}.hidden{display:none!important}@media(min-width:600px){.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:380px){.metric{font-size:22px}.app{padding-left:10px;padding-right:10px}.card{padding:12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div><div class="brand">FORGE / FITNESS</div><h1>My Journey</h1><div class="muted small" id="today"></div></div><button class="pill" id="exportBtn">Export data ↗</button></header>
+<section class="hero"><div class="small" style="color:var(--accent);font-weight:800;letter-spacing:.08em">CONSISTENCY OVER PERFECTION</div><h2 style="font-size:22px;margin:8px 0 4px">Build the trend. Trust the process.</h2><p>Log the basics today. Use your weekly trend—not one weigh-in—to make decisions.</p></section>
+<div id="dashboard" class="page active">
+ <div class="grid four" id="quickMetrics"></div>
+ <div class="section-head"><h2>Today's targets</h2><button class="btn secondary" id="editTargets">Edit targets</button></div>
+ <div class="card" id="targetCard"></div>
+ <div class="section-head"><h2>Daily check-in</h2><span class="pill">Today</span></div>
+ <div class="card">
+  <form id="checkinForm"><div class="formgrid">
+   <div class="field"><label for="cweight">Weight (kg)</label><input id="cweight" type="number" step=".1" min="0" placeholder="e.g. 91.2"></div>
+   <div class="field"><label for="ccal">Calories (kcal)</label><input id="ccal" type="number" min="0" placeholder="2300"></div>
+   <div class="field"><label for="cprotein">Protein (g)</label><input id="cprotein" type="number" min="0" placeholder="180"></div>
+   <div class="field"><label for="ccarbs">Carbs (g)</label><input id="ccarbs" type="number" min="0" placeholder="260"></div>
+   <div class="field"><label for="cfat">Fat (g)</label><input id="cfat" type="number" min="0" placeholder="60"></div>
+   <div class="field"><label for="cwater">Water (L)</label><input id="cwater" type="number" step=".1" min="0" placeholder="2.5"></div>
+   <div class="field"><label for="csteps">Steps</label><input id="csteps" type="number" min="0" placeholder="10000"></div>
+   <div class="field"><label for="csleep">Sleep (hours)</label><input id="csleep" type="number" step=".1" min="0" max="24" placeholder="7.5"></div>
+   <div class="field"><label for="ctraining">Training</label><select id="ctraining"><option>Rest</option><option>Full body push</option><option>Full body pull</option><option>Full body balanced</option><option>Cardio</option><option>Other</option></select></div>
+   <div class="field"><label for="crecovery">Energy / recovery (1–5)</label><select id="crecovery"><option value="">Choose</option><option value="1">1 — very low</option><option value="2">2 — low</option><option value="3">3 — okay</option><option value="4">4 — good</option><option value="5">5 — excellent</option></select></div>
+   <div class="field wide"><label for="cnotes">Notes (hunger, mood, soreness, etc.)</label><textarea id="cnotes" rows="2" placeholder="Anything that affected today…"></textarea></div>
+  </div><button class="btn full" type="submit">Save today's check-in</button></form>
+ </div>
+ <div class="section-head"><h2>Coach's read</h2><span class="pill">Based on your logs</span></div><div class="card" id="coachSummary"></div>
+ <div class="section-head"><h2>Recent check-ins</h2></div><div class="card" id="recentLogs"></div>
+</div>
+<div id="nutrition" class="page">
+ <div class="section-head"><h2>Nutrition diary</h2><span class="pill">Manual entry</span></div>
+ <div class="card"><form id="mealForm"><div class="formgrid">
+  <div class="field"><label for="mealDate">Date</label><input id="mealDate" type="date" required></div><div class="field"><label for="mealName">Meal / food</label><input id="mealName" required placeholder="Chicken pasta"></div>
+  <div class="field"><label for="mealCalories">Calories</label><input id="mealCalories" type="number" min="0" required></div><div class="field"><label for="mealProtein">Protein (g)</label><input id="mealProtein" type="number" min="0" value="0"></div>
+  <div class="field"><label for="mealCarbs">Carbs (g)</label><input id="mealCarbs" type="number" min="0" value="0"></div><div class="field"><label for="mealFat">Fat (g)</label><input id="mealFat" type="number" min="0" value="0"></div>
+ </div><button class="btn full" type="submit">Add meal</button></form></div>
+ <div class="card"><h3>Today's intake</h3><div id="nutritionTotals"></div></div>
+ <div class="card"><h3>Food diary</h3><div id="mealList"></div></div>
+ <div class="section-head"><h2>Saved recipes</h2></div><div class="card" id="recipeList"></div>
+ <div class="card"><h3>Add a recipe</h3><form id="recipeForm"><div class="field"><label for="rname">Recipe name</label><input id="rname" required placeholder="Chicken pasta"></div><div class="formgrid"><div class="field"><label for="rservings">Servings</label><input id="rservings" type="number" min="1" value="4"></div><div class="field"><label for="rcal">Calories / serving</label><input id="rcal" type="number" min="0" required></div><div class="field"><label for="rprotein">Protein / serving (g)</label><input id="rprotein" type="number" min="0" value="0"></div><div class="field"><label for="rcarbs">Carbs / serving (g)</label><input id="rcarbs" type="number" min="0" value="0"></div><div class="field"><label for="rfat">Fat / serving (g)</label><input id="rfat" type="number" min="0" value="0"></div><div class="field wide"><label for="ringredients">Ingredients / notes</label><textarea id="ringredients" rows="2"></textarea></div></div><button class="btn full" type="submit">Save recipe</button></form></div>
+</div>
+<div id="workouts" class="page">
+ <div class="section-head"><h2>Workout log</h2><span class="pill">Strength & consistency</span></div>
+ <div class="card"><form id="workoutForm"><div class="formgrid">
+  <div class="field"><label for="wdate">Date</label><input id="wdate" type="date" required></div><div class="field"><label for="wsession">Session</label><select id="wsession"><option>Full body push</option><option>Full body pull</option><option>Full body balanced</option><option>Cardio</option><option>Other</option></select></div>
+  <div class="field wide"><label for="wexercise">Exercise</label><input id="wexercise" required placeholder="Bench press"></div>
+  <div class="field"><label for="wsets">Sets</label><input id="wsets" type="number" min="1" value="3" required></div><div class="field"><label for="wreps">Reps per set</label><input id="wreps" type="number" min="1" value="10" required></div>
+  <div class="field"><label for="wweight">Weight (kg)</label><input id="wweight" type="number" min="0" step=".5" value="0"></div><div class="field"><label for="wrpe">Effort (RPE 1–10)</label><input id="wrpe" type="number" min="1" max="10" placeholder="8"></div>
+  <div class="field wide"><label for="wnotes">Notes</label><input id="wnotes" placeholder="Technique, reps in reserve…"></div>
+ </div><button class="btn full" type="submit">Log exercise</button></form></div>
+ <div class="card"><h3>Recent sessions</h3><div id="workoutList"></div></div><div class="card"><h3>Exercise progress</h3><div class="field"><label for="exerciseFilter">Choose exercise</label><select id="exerciseFilter"></select></div><div id="exerciseProgress"></div></div>
+</div>
+<div id="progress" class="page">
+ <div class="section-head"><h2>Progress & measurements</h2></div>
+ <div class="card"><h3>Weight trend</h3><div id="weightChart"></div><div id="weightStats" class="muted small"></div><p class="small muted">A rolling trend is more useful than a single day's weight. Water, sodium, food volume and training can move the scale temporarily.</p></div>
+ <div class="card"><h3>Body measurements</h3><form id="measurementForm"><div class="formgrid"><div class="field"><label for="mdate">Date</label><input id="mdate" type="date" required></div><div class="field"><label for="mwaist">Waist (cm)</label><input id="mwaist" type="number" step=".1" min="0"></div><div class="field"><label for="mchest">Chest (cm)</label><input id="mchest" type="number" step=".1" min="0"></div><div class="field"><label for="mhips">Hips (cm)</label><input id="mhips" type="number" step=".1" min="0"></div><div class="field"><label for="marm">Arm (cm)</label><input id="marm" type="number" step=".1" min="0"></div><div class="field"><label for="mfat">Body fat (%)</label><input id="mfat" type="number" step=".1" min="0" max="100"></div></div><button class="btn full" type="submit">Save measurements</button></form><div id="measurementList"></div></div>
+ <div class="card"><h3>Progress photos</h3><p class="muted small">Photos are kept in this browser on this device. Large photo collections can use substantial storage.</p><div class="field"><label for="photoDate">Date</label><input id="photoDate" type="date"></div><div class="field"><label for="photoFile">Choose photo</label><input id="photoFile" type="file" accept="image/*" capture="environment"></div><button class="btn full" id="savePhoto">Save progress photo</button><div id="photoList"></div></div>
+</div>
+<div id="settings" class="page">
+ <div class="section-head"><h2>Settings & data</h2></div>
+ <div class="card"><h3>Daily targets</h3><form id="targetsForm"><div class="formgrid"><div class="field"><label for="tcal">Calories (kcal)</label><input id="tcal" type="number" min="0" required></div><div class="field"><label for="tprotein">Protein (g)</label><input id="tprotein" type="number" min="0" required></div><div class="field"><label for="tcarbs">Carbs (g)</label><input id="tcarbs" type="number" min="0" required></div><div class="field"><label for="tfat">Fat (g)</label><input id="tfat" type="number" min="0" required></div></div><button class="btn full">Save targets</button></form></div>
+ <div class="card"><h3>Backup and privacy</h3><p class="muted small">This first version stores data locally in this browser. It is not synced to a cloud account and isn't automatically shared with a coach. Clearing browser data may erase it. Export a backup regularly.</p><div class="actions"><button class="btn" id="exportBtn2">Export backup (JSON)</button><label class="btn secondary" for="importFile">Import backup</label><input class="hidden" id="importFile" type="file" accept=".json,application/json"></div></div>
+ <div class="card"><h3>Smartwatch connection</h3><div class="notice">Not connected in version 1. The app currently accepts steps, sleep and other readings manually. A later Android build can connect through Health Connect, subject to device permissions and supported watch data.</div></div>
+ <div class="card"><h3>AI coaching</h3><p class="muted small">The coaching summary in this version uses simple local rules; it does not send your health data to an AI service. A real AI coach can be added later with your explicit consent and a secure service connection.</p></div>
+ <div class="card"><h3>Reset app</h3><p class="muted small">This permanently clears data stored by this app in this browser. Export a backup first.</p><button class="btn danger" id="resetBtn">Delete all local data</button></div>
+</div>
+</div>
+<nav class="tabs"><div class="tabs-inner">
+<button class="tab active" data-page="dashboard"><span class="ico">⌂</span>Today</button><button class="tab" data-page="nutrition"><span class="ico">◉</span>Food</button><button class="tab" data-page="workouts"><span class="ico">↗</span>Train</button><button class="tab" data-page="progress"><span class="ico">⌁</span>Progress</button><button class="tab" data-page="settings"><span class="ico">⚙</span>Settings</button>
+</div></nav>
+<script>
+const $=id=>document.getElementById(id);
+const today=()=>new Date().toLocaleDateString('en-CA');
+const fmtDate=d=>{if(!d)return '—';let x=new Date(d+'T12:00:00');return x.toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})};
+const num=v=>v===''||v===null||v===undefined?null:Number(v);
+const defaultData={targets:{calories:2300,protein:180,carbs:260,fat:60},checkins:[],meals:[],recipes:[],workouts:[],measurements:[],photos:[]};
+let data=loadData();
+function loadData(){try{return {...structuredClone(defaultData),...JSON.parse(localStorage.getItem('forgeFitnessData')||'{}')};}catch(e){return structuredClone(defaultData)}}
+function save(){localStorage.setItem('forgeFitnessData',JSON.stringify(data));renderAll()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function val(id){return $(id).value}
+function setval(id,v){$(id).value=v??''}
+function currentCheckin(){return data.checkins.find(x=>x.date===today())}
+function sorted(a,key='date'){return [...a].sort((x,y)=>(y[key]||'').localeCompare(x[key]||''))}
+function macroBar(label,value,target,unit='g'){let pct=target?Math.min(100,Math.round(value/target*100)):0;return `<div style="margin:12px 0"><div style="display:flex;justify-content:space-between;gap:8px;font-size:13px"><span>${label}</span><span>${Math.round(value)} / ${target} ${unit}</span></div><div class="progress"><div style="width:${pct}%"></div></div></div>`}
+function renderDashboard(){
+ const c=currentCheckin()||{},t=data.targets;
+ $('quickMetrics').innerHTML=[['Weight',c.weight!=null?c.weight+' kg':'—','today'],['Calories',c.calories!=null?c.calories:'—','kcal'],['Protein',c.protein!=null?c.protein+' g':'—','protein'],['Steps',c.steps!=null?Number(c.steps).toLocaleString():'—','steps']].map(a=>`<div class="card"><div class="label">${a[2]}</div><div class="metric">${a[1]}</div><div class="small muted">${a[0]}</div></div>`).join('');
+ let meals=data.meals.filter(m=>m.date===today());let totals={calories:0,protein:0,carbs:0,fat:0};meals.forEach(m=>Object.keys(totals).forEach(k=>totals[k]+=Number(m[k]||0)));
+ let vals={calories:c.calories??totals.calories,protein:c.protein??totals.protein,carbs:c.carbs??totals.carbs,fat:c.fat??totals.fat};
+ $('targetCard').innerHTML=macroBar('Calories',vals.calories,t.calories,'kcal')+macroBar('Protein',vals.protein,t.protein)+macroBar('Carbohydrates',vals.carbs,t.carbs)+macroBar('Fat',vals.fat,t.fat)+`<div class="small muted">For the dashboard, saved daily check-in values take priority; if absent, food diary totals are shown.</div>`;
+ const logs=sorted(data.checkins);
+ let messages=[];
+ if(logs.length<3)messages.push('Log a few more days before drawing conclusions. Consistent data beats guessing.');
+ else{
+  const recent=logs.slice(0,7),weights=recent.filter(x=>x.weight!=null).map(x=>x.weight);
+  if(weights.length>=3){let first=weights[weights.length-1],last=weights[0],diff=last-first;messages.push(Math.abs(diff)<.2?'Your recent scale readings are broadly stable. Keep logging and assess the 2–3 week trend.':diff<0?`Your recent logged weights are down ${Math.abs(diff).toFixed(1)} kg from the oldest reading in this sample. Check the longer trend and recovery too.`:`Your recent logged weights are up ${diff.toFixed(1)} kg from the oldest reading in this sample. Short-term changes can reflect water, food volume and sodium; don't react to one reading.`)}
+  let avgSleep=recent.filter(x=>x.sleep!=null);if(avgSleep.length){let a=avgSleep.reduce((s,x)=>s+x.sleep,0)/avgSleep.length;if(a<7)messages.push(`Average logged sleep is ${a.toFixed(1)} h. If possible, protect more sleep to support recovery.`)}
+  let protein=recent.filter(x=>x.protein!=null);if(protein.length){let a=protein.reduce((s,x)=>s+x.protein,0)/protein.length;if(a<t.protein*.9)messages.push(`Average logged protein is ${Math.round(a)} g, below your ${t.protein} g target. Add a reliable protein serving where convenient.`)}
+ }
+ $('coachSummary').innerHTML=messages.map(m=>`<p style="margin:0 0 9px">${esc(m)}</p>`).join('')+'<p class="small muted" style="margin-bottom:0">This is a basic rule-based summary, not medical advice or a true AI assessment.</p>';
+ $('recentLogs').innerHTML=logs.length?logs.slice(0,5).map(x=>`<div class="listitem"><div><strong>${fmtDate(x.date)}</strong><div class="small muted">${esc(x.training||'No session')} · ${x.steps!=null?Number(x.steps).toLocaleString()+' steps':'steps not logged'}</div></div><div style="text-align:right"><strong>${x.weight??'—'} kg</strong><div class="small muted">${x.calories??'—'} kcal</div></div></div>`).join(''):"<div class=\"empty\">No check-ins yet. Add today's data above to get started.</div>";
+ const c0=currentCheckin();if(c0){['weight','calories','protein','carbs','fat','water','steps','sleep','training','recovery','notes'].forEach(k=>{let id='c'+k; if($(id))setval(id,c0[k])})}
+}
+function renderNutrition(){
+ let meals=sorted(data.meals.filter(m=>m.date===today()));let totals={calories:0,protein:0,carbs:0,fat:0};meals.forEach(m=>Object.keys(totals).forEach(k=>totals[k]+=Number(m[k]||0)));
+ $('nutritionTotals').innerHTML=`<div class="metric">${totals.calories} <span>kcal</span></div>`+macroBar('Protein',totals.protein,data.targets.protein)+macroBar('Carbs',totals.carbs,data.targets.carbs)+macroBar('Fat',totals.fat,data.targets.fat);
+ $('mealList').innerHTML=meals.length?meals.map(m=>`<div class="listitem"><div><strong>${esc(m.name)}</strong><div class="small muted">${m.calories} kcal · P ${m.protein} / C ${m.carbs} / F ${m.fat} g</div></div><button class="btn secondary" onclick="removeItem('meals','${m.id}')">Remove</button></div>`).join(''):'<div class="empty">No meals logged today.</div>';
+ $('recipeList').innerHTML=data.recipes.length?data.recipes.map(r=>`<div class="listitem"><div><strong>${esc(r.name)}</strong><div class="small muted">${r.calories} kcal · P ${r.protein} / C ${r.carbs} / F ${r.fat} g per serving · ${r.servings} servings</div>${r.ingredients?`<div class="small muted">${esc(r.ingredients)}</div>`:''}</div><button class="btn secondary" onclick="addRecipeMeal('${r.id}')">Log serving</button></div>`).join(''):'<div class="empty">Save your favourite recipes here.</div>';
+}
+function renderWorkouts(){
+ let ws=sorted(data.workouts);$('workoutList').innerHTML=ws.length?ws.slice(0,25).map(w=>`<div class="listitem"><div><strong>${esc(w.exercise)}</strong><div class="small muted">${fmtDate(w.date)} · ${esc(w.session)} · ${w.sets} × ${w.reps} @ ${w.weight} kg${w.rpe?' · RPE '+w.rpe:''}</div>${w.notes?`<div class="small muted">${esc(w.notes)}</div>`:''}</div><button class="btn secondary" onclick="removeItem('workouts','${w.id}')">Remove</button></div>`).join(''):'<div class="empty">No exercises logged yet.</div>';
+ let names=[...new Set(data.workouts.map(w=>w.exercise))].sort();let old=val('exerciseFilter');$('exerciseFilter').innerHTML='<option value="">Choose an exercise</option>'+names.map(n=>`<option>${esc(n)}</option>`).join('');if(names.includes(old))setval('exerciseFilter',old);renderExerciseProgress();
+}
+function renderExerciseProgress(){let name=val('exerciseFilter');let ws=sorted(data.workouts.filter(w=>w.exercise===name));$('exerciseProgress').innerHTML=!name?'<div class="empty">Log exercises, then choose one to see the history.</div>':ws.length?ws.map(w=>`<div class="listitem"><div>${fmtDate(w.date)}<div class="small muted">${w.sets} × ${w.reps}</div></div><div><strong>${w.weight} kg</strong><div class="small muted">volume ${w.sets*w.reps*w.weight} kg</div></div></div>`).join(''):'<div class="empty">No history for this exercise.</div>'}
+function renderProgress(){
+ let ws=sorted(data.checkins).filter(x=>x.weight!=null).slice(0,14).reverse();
+ if(!ws.length){$('weightChart').innerHTML='<div class="empty">Log body weight in Daily check-in to build your trend.</div>';$('weightStats').textContent='';}
+ else{let min=Math.min(...ws.map(x=>x.weight)),max=Math.max(...ws.map(x=>x.weight)),range=max-min||1;$('weightChart').innerHTML=ws.map(x=>`<div class="barrow"><span>${fmtDate(x.date).replace(/, \d{4}/,'')}</span><div class="bar"><div style="width:${Math.max(3,((x.weight-min)/range)*85+15)}%"></div></div><strong>${x.weight}</strong></div>`).join('');let diff=ws[ws.length-1].weight-ws[0].weight;$('weightStats').textContent=`${ws.length} logged readings · ${diff>0?'+':''}${diff.toFixed(1)} kg across this displayed period.`}
+ $('measurementList').innerHTML=sorted(data.measurements).slice(0,8).map(m=>`<div class="listitem"><div><strong>${fmtDate(m.date)}</strong><div class="small muted">${[['Waist',m.waist],['Chest',m.chest],['Hips',m.hips],['Arm',m.arm],['Body fat',m.fat!=null?m.fat+'%':null]].filter(x=>x[1]!=null).map(x=>x[0]+' '+x[1]+(x[0]==='Body fat'?'':' cm')).join(' · ')}</div></div><button class="btn secondary" onclick="removeItem('measurements','${m.id}')">Remove</button></div>`).join('')||'<div class="empty">Add measurements every few weeks under similar conditions.</div>';
+ $('photoList').innerHTML=sorted(data.photos).map(p=>`<div class="listitem"><div><strong>${fmtDate(p.date)}</strong><br><img class="photo-preview" src="${p.data}" alt="Progress photo"></div><button class="btn secondary" onclick="removeItem('photos','${p.id}')">Remove</button></div>`).join('')||'<div class="empty">No progress photos saved.</div>';
+}
+function renderSettings(){['calories','protein','carbs','fat'].forEach(k=>setval('t'+(k==='calories'?'cal':k),data.targets[k]))}
+function renderAll(){renderDashboard();renderNutrition();renderWorkouts();renderProgress();renderSettings()}
+function removeItem(key,id){if(!confirm('Remove this entry?'))return;data[key]=data[key].filter(x=>x.id!==id);save()}
+function addRecipeMeal(id){let r=data.recipes.find(x=>x.id===id);if(!r)return;data.meals.push({id:crypto.randomUUID(),date:today(),name:r.name+' (1 serving)',calories:r.calories,protein:r.protein,carbs:r.carbs,fat:r.fat});save();alert('One serving added to today’s diary.')}
+function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='forge-fitness-backup-'+today()+'.json';a.click();URL.revokeObjectURL(a.href)}
+$('today').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===b.dataset.page));window.scrollTo(0,0)}));
+$('checkinForm').addEventListener('submit',e=>{e.preventDefault();let obj={date:today()};['weight','calories','protein','carbs','fat','water','steps','sleep','recovery'].forEach(k=>obj[k]=num(val('c'+k)));obj.training=val('ctraining');obj.notes=val('cnotes');let i=data.checkins.findIndex(x=>x.date===today());if(i>=0)data.checkins[i]={...data.checkins[i],...obj};else data.checkins.push(obj);save();alert('Check-in saved.')});
+$('mealDate').value=today();$('wdate').value=today();$('mdate').value=today();$('photoDate').value=today();
+$('mealForm').addEventListener('submit',e=>{e.preventDefault();data.meals.push({id:crypto.randomUUID(),date:val('mealDate'),name:val('mealName').trim(),calories:num(val('mealCalories'))||0,protein:num(val('mealProtein'))||0,carbs:num(val('mealCarbs'))||0,fat:num(val('mealFat'))||0});save();e.target.reset();$('mealDate').value=today();$('mealProtein').value=0;$('mealCarbs').value=0;$('mealFat').value=0});
+$('recipeForm').addEventListener('submit',e=>{e.preventDefault();data.recipes.push({id:crypto.randomUUID(),name:val('rname').trim(),servings:num(val('rservings'))||1,calories:num(val('rcal'))||0,protein:num(val('rprotein'))||0,carbs:num(val('rcarbs'))||0,fat:num(val('rfat'))||0,ingredients:val('ringredients')});save();e.target.reset();$('rservings').value=4;$('rprotein').value=0;$('rcarbs').value=0;$('rfat').value=0});
+$('workoutForm').addEventListener('submit',e=>{e.preventDefault();data.workouts.push({id:crypto.randomUUID(),date:val('wdate'),session:val('wsession'),exercise:val('wexercise').trim(),sets:num(val('wsets')),reps:num(val('wreps')),weight:num(val('wweight'))||0,rpe:num(val('wrpe')),notes:val('wnotes')});save();let keep=val('wsession');e.target.reset();$('wdate').value=today();$('wsession').value=keep;$('wsets').value=3;$('wreps').value=10;$('wweight').value=0});
+$('exerciseFilter').addEventListener('change',renderExerciseProgress);
+$('measurementForm').addEventListener('submit',e=>{e.preventDefault();let o={id:crypto.randomUUID(),date:val('mdate')};['waist','chest','hips','arm','fat'].forEach(k=>o[k]=num(val('m'+k)));data.measurements.push(o);save();e.target.reset();$('mdate').value=today()});
+$('savePhoto').addEventListener('click',()=>{let file=$('photoFile').files[0];if(!file){alert('Choose a photo first.');return}if(file.size>4*1024*1024){alert('Please choose a photo smaller than 4 MB for this local version.');return}let reader=new FileReader();reader.onload=()=>{data.photos.push({id:crypto.randomUUID(),date:val('photoDate')||today(),data:reader.result});try{save();$('photoFile').value='';alert('Photo saved on this device.')}catch(e){alert('Browser storage is full. Export data and remove some photos.')}};reader.readAsDataURL(file)});
+$('targetsForm').addEventListener('submit',e=>{e.preventDefault();data.targets={calories:num(val('tcal'))||0,protein:num(val('tprotein'))||0,carbs:num(val('tcarbs'))||0,fat:num(val('tfat'))||0};save();alert('Targets saved.')});
+$('editTargets').addEventListener('click',()=>{document.querySelector('[data-page="settings"]').click();window.scrollTo(0,0)});
+$('exportBtn').addEventListener('click',exportData);$('exportBtn2').addEventListener('click',exportData);
+$('importFile').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let imported=JSON.parse(r.result);if(!imported.targets||!Array.isArray(imported.checkins))throw Error();if(confirm('Import this backup and replace the current local data?')){data={...structuredClone(defaultData),...imported};save();alert('Backup imported.')}}catch(err){alert('That backup file does not look valid.')}e.target.value=''};r.readAsText(f)});
+$('resetBtn').addEventListener('click',()=>{if(confirm('Delete all Forge Fitness data stored in this browser? Export a backup first if you want to keep it.')){data=structuredClone(defaultData);save()}});
+renderAll();
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+</body></html>
